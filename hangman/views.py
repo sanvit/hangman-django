@@ -23,7 +23,7 @@ class HangmanGameView(APIView):
         game = get_object_or_404(Hangman, id=kwargs['id'])
         if len(game.tried_chars) >= game.max_try:
             return Response({"error": "you have tried the maximum amount"})
-        if not request.data.get('char') or len(request.data.get('char')) != 1 or not request.data.get('char').isalphe():
+        if not request.data.get('char') or len(request.data.get('char')) != 1 or not request.data.get('char').isalpha():
             return Response({"error": "the request is undefined or malformed"}, status=400)
         elif request.data.get('char') in game.tried_chars:
             pass
